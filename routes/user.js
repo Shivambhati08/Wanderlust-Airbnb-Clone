@@ -14,7 +14,7 @@ router
   .post(wrapasync(userController.signup));
 
 router
-  .route("/login")
+  .route("/signin")
   .get(userController.renderLoginForm)
   .post(
     saveRedirectUrl,
