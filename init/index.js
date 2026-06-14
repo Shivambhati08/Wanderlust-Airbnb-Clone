@@ -18,11 +18,26 @@ async function main(){
     await mongoose.connect(MONGO_URL);
 };
  
-const initdb  = async ()=>{
-    await Listing.deleteMany({}); 
-    initdata.data = initdata.data.map((obj)=>({...obj, owner: "6a2da14a47588c48735be3c4"}))
-    await Listing.insertMany(initdata.data);
+// const initdb  = async ()=>{
+//     await Listing.deleteMany({}); 
+//     initdata.data = initdata.data.map((obj)=>({...obj, owner: "6a2ee4fad06e30fa6b9e768c"}))
+//     await Listing.insertMany(initdata.data);
+//     console.log("Database initialized");
+// };
+
+// initdb();
+const initDB = async () => {
+    await Listing.deleteMany({});
+
+    const ownerId = "6a2ee4fad06e30fa6b9e768c"; // Existing User _id
+
+    const listings = initdata.data.map((obj) => ({
+        ...obj,
+        owner: ownerId,
+    }));
+
+    await Listing.insertMany(listings);
     console.log("Database initialized");
 };
 
-initdb();
+initDB();
